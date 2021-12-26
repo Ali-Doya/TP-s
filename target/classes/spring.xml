@@ -1,0 +1,4 @@
+<beans>
+    <bean id="controller"
+          class="cigma.pfe.contollers.ClientController"></bean>
+</beans>
