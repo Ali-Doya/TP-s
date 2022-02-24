@@ -1,7 +1,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
         "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans>
-    <bean id="controller" class="cigma.pfe.controllers.ClientController"
+    <bean id="controller" class="cigma.pfe.presentation.ClientController"
           scope="prototype">
         <constructor-arg ref="service"/>
     </bean>
@@ -9,7 +9,7 @@
           scope="prototype">
         <constructor-arg ref="repository"/>
     </bean>
-    <bean id="repository"
-          class="cigma.pfe.repositories.ClientRepositoryImpl"
-          scope="prototype"></bean>
+    <bean id="repository" class="cigma.pfe.dao.ClientDaoImpl"
+          scope="prototype">
+    </bean>
 </beans>

@@ -1,22 +1,34 @@
 package cigma.pfe.services;
 
-import cigma.pfe.models.Client;
-import cigma.pfe.repositories.ClientRepository;
 
+import cigma.pfe.dao.ClientDao;
+import cigma.pfe.models.Client;
 
 public class ClientServiceImpl implements ClientService {
 
+    private ClientDao dao;
+    public void setDao(ClientDao dao)  {
+        this.dao = dao;
+    }
 
     @Override
-    public Client save(Client c) {
-        System.out.println("Service Layer : ClientServiceImpl Level... ");
-        return clientRepository.save(c);
+    public Client save(Client c)  {
+        return dao.save(c);
     }
 
-    ClientRepository clientRepository ;
-    public ClientServiceImpl(ClientRepository clientRepository) {
-        System.out.println("Call ClientServiceImpl with ClientRepository param....");
-        this.clientRepository = clientRepository;
+    @Override
+    public Client modify(Client c)  {
+        return dao.update(c);
     }
+
+    @Override
+    public void removeById(long id) {
+        dao.deleteById(id);
     }
+
+    @Override
+    public Client getById(long id) {
+        return dao.findById(id);
+    }
+}
 
