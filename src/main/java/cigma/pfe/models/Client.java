@@ -1,36 +1,24 @@
 package cigma.pfe.models;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
+import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
 
-@Getter
-@Setter
 @Entity
-@ToString
+@Data
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+// GenerationType.IDENTITY n’est pas permise si
+// La stratégie d'héritage est TABLE_PER_CLASS
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     private String name;
-    @OneToOne(cascade = {CascadeType.PERSIST},mappedBy = "client")
-    private CarteFidelio carteFidelio;
-    @JoinTable(name = "my_join_table_client_promotion", joinColumns = @JoinColumn(
-            name = "client_fk",
-            referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "promotion_fk", referencedColumnName = "id")
-    )
-
-    private List<Promotion> promotions;
-    private List<Facture> factures;
-
-    public Client() {
-    }
 
     public Client(String name) {
         this.name = name;
+    }
+
+    public Client() {
     }
 }
